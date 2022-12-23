@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\FishPondsRequest;
+use App\Models\fishponds;
 
 class FishpondsController extends Controller
 {
@@ -13,18 +14,8 @@ class FishpondsController extends Controller
      */
     public function index()
     {
-        $Fishponds = Fishponds::all();
-        echo $Fishponds;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $Fishponds = fishponds::all();
+        return response()->json(["data" => $Fishponds], 200);
     }
 
     /**
@@ -33,9 +24,14 @@ class FishpondsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FishPondsRequest $request)
     {
-        //
+        $Fishponds = new fishponds;
+        $Fishponds->Pond_name = $request->Pond_name;
+        $Fishponds->locationi = $request->locationi;
+        $Fishponds->save();
+
+        return response()->json(["data" => $Fishponds], 201);
     }
 
     /**
@@ -46,19 +42,8 @@ class FishpondsController extends Controller
      */
     public function show($id)
     {
-        $Fishponds = Fishponds::findOrFail($id);
-        echo $Fishponds;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $Fishponds = Fishponds::findorFail($id);
+        return response()->json(["data" => $Fishponds], 200);
     }
 
     /**
@@ -68,9 +53,15 @@ class FishpondsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FishPondsRequest $request, $id)
     {
-        //
+        $Fishponds = Fishponds::findorFail($id);
+        $Fishponds->Pond_name = $request->Pond_name;
+        $Fishponds->locationi = $request->locationi;
+        // save with Pond_Id = $id
+        $Fishponds->save();
+
+        return response()->json(["data" => $Fishponds], 200);
     }
 
     /**
@@ -81,6 +72,9 @@ class FishpondsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Fishponds = Fishponds::findorFail($id);
+        $Fishponds->delete();
+
+        return response()->json(["data" => $Fishponds], 200);
     }
 }

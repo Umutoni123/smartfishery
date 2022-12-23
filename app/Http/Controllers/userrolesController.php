@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRolesRequest;
+use App\Models\userroles;
 use Illuminate\Http\Request;
 
 class userrolesController extends Controller
@@ -14,17 +16,7 @@ class userrolesController extends Controller
     public function index()
     {
         $userroles = userroles::all();
-        echo $userroles;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(["data" => $userroles], 200);
     }
 
     /**
@@ -33,9 +25,13 @@ class userrolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRolesRequest $request)
     {
-        //
+        $userroles = new userroles;
+        $userroles->role = $request->role;
+        $userroles->save();
+
+        return response()->json(["data" => $userroles], 201);
     }
 
     /**
@@ -47,18 +43,7 @@ class userrolesController extends Controller
     public function show($id)
     {
         $userroles = userroles::findOrFail($id);
-        echo $userroles;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $userroles], 200);
     }
 
     /**
@@ -68,9 +53,13 @@ class userrolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRolesRequest $request, $id)
     {
-        //
+        $userroles = userroles::findOrFail($id);
+        $userroles->role = $request->role;
+        $userroles->save();
+
+        return response()->json(["data" => $userroles], 200);
     }
 
     /**
@@ -81,6 +70,9 @@ class userrolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userroles = userroles::findOrFail($id);
+        $userroles->delete();
+
+        return response()->json(["data" => $userroles], 200);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LocationsRequest;
+use App\Models\Locations;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -13,18 +15,8 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $Location = Location::all();
-        echo $Location;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $Location = Locations::all();
+        return response()->json(["data" => $Location], 200);
     }
 
     /**
@@ -33,9 +25,17 @@ class LocationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LocationsRequest $request)
     {
-        //
+        $Location = new Locations;
+        $Location->Location_name = $request->Location_name;
+        $Location->Province = $request->Province;
+        $Location->District = $request->District;
+        $Location->Sector = $request->Sector;
+        $Location->Cell = $request->Cell;
+        $Location->save();
+
+        return response()->json(["data" => $Location], 201);
     }
 
     /**
@@ -46,19 +46,8 @@ class LocationController extends Controller
      */
     public function show($id)
     {
-        $Location = Location::findOrFail($id);
-        echo $Location;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $Location = Locations::findOrFail($id);
+        return response()->json(["data" => $Location], 200);
     }
 
     /**
@@ -68,9 +57,17 @@ class LocationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LocationsRequest $request, $id)
     {
-        //
+        $Location = Locations::findOrFail($id);
+        $Location->Location_name = $request->Location_name;
+        $Location->Province = $request->Province;
+        $Location->District = $request->District;
+        $Location->Sector = $request->Sector;
+        $Location->Cell = $request->Cell;
+        $Location->save();
+
+        return response()->json(["data" => $Location], 200);
     }
 
     /**
@@ -81,6 +78,9 @@ class LocationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Location = Locations::findOrFail($id);
+        $Location->delete();
+
+        return response()->json(["data" => $Location], 200);
     }
 }

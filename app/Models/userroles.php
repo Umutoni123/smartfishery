@@ -9,7 +9,8 @@ class userroles extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'role_Id','role_name','description','locationid'
+        'role_Id', 'role_name', 'description', 'locationid'
         //'coop_ID'
     ];
+    protected $primaryKey = 'role_Id';
 }

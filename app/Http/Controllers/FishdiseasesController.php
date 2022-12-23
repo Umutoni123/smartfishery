@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\FishdiseasesRequest;
+use App\Models\Fishdiseases;
 
 class FishdiseasesController extends Controller
 {
@@ -14,17 +15,7 @@ class FishdiseasesController extends Controller
     public function index()
     {
         $Fishdiseases = Fishdiseases::all();
-        echo $Fishdiseases;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(["data" => $Fishdiseases], 200);
     }
 
     /**
@@ -33,9 +24,14 @@ class FishdiseasesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FishdiseasesRequest $request)
     {
-        //
+        $Fishdiseases = new Fishdiseases;
+        $Fishdiseases->Disease_name = $request->Disease_name;
+        $Fishdiseases->Disease_description = $request->Disease_description;
+        $Fishdiseases->save();
+
+        return response()->json(["data" => $Fishdiseases], 201);
     }
 
     /**
@@ -47,18 +43,7 @@ class FishdiseasesController extends Controller
     public function show($id)
     {
         $Fishdiseases = Fishdiseases::findOrFail($id);
-        echo $Fishdiseases;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $Fishdiseases], 200);
     }
 
     /**
@@ -68,9 +53,14 @@ class FishdiseasesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FishdiseasesRequest $request, $id)
     {
-        //
+        $Fishdiseases = Fishdiseases::findOrFail($id);
+        $Fishdiseases->Disease_name = $request->Disease_name;
+        $Fishdiseases->Disease_description = $request->Disease_description;
+        $Fishdiseases->save();
+
+        return response()->json(["data" => $Fishdiseases], 200);
     }
 
     /**
@@ -81,6 +71,9 @@ class FishdiseasesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Fishdiseases = Fishdiseases::findOrFail($id);
+        $Fishdiseases->delete();
+
+        return response()->json(["data" => $Fishdiseases], 200);
     }
 }

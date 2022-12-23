@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecommendedTreatmentRequest;
+use App\Models\recommended_treatment;
 use Illuminate\Http\Request;
 
 class Recommended_treattmentController extends Controller
@@ -13,18 +15,8 @@ class Recommended_treattmentController extends Controller
      */
     public function index()
     {
-        $Recommended_treatment = Recommended_treatment::all();
-        echo $Recommended_treatment;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $Recommended_treatment = recommended_treatment::all();
+        return response()->json(["data" => $Recommended_treatment], 200);
     }
 
     /**
@@ -33,9 +25,13 @@ class Recommended_treattmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RecommendedTreatmentRequest $request)
     {
-        //
+        $Recommended_treatment = new recommended_treatment;
+        $Recommended_treatment->Recommended_treatment = $request->Recommended_treatment;
+        $Recommended_treatment->save();
+
+        return response()->json(["data" => $Recommended_treatment], 201);
     }
 
     /**
@@ -47,18 +43,7 @@ class Recommended_treattmentController extends Controller
     public function show($id)
     {
         $Recommended_treatment = Recommended_treatment::findOrFail($id);
-        echo $Recommended_treatment;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $Recommended_treatment], 200);
     }
 
     /**
@@ -68,9 +53,13 @@ class Recommended_treattmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RecommendedTreatmentRequest $request, $id)
     {
-        //
+        $Recommended_treatment = Recommended_treatment::findOrFail($id);
+        $Recommended_treatment->Recommended_treatment = $request->Recommended_treatment;
+        $Recommended_treatment->save();
+
+        return response()->json(["data" => $Recommended_treatment], 200);
     }
 
     /**
@@ -81,6 +70,9 @@ class Recommended_treattmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Recommended_treatment = Recommended_treatment::findOrFail($id);
+        $Recommended_treatment->delete();
+
+        return response()->json(["data" => $Recommended_treatment], 200);
     }
 }

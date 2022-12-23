@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PermissionRequest;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -14,17 +16,7 @@ class PermissionController extends Controller
     public function index()
     {
         $Permission = Permission::all();
-        echo $Permission;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(["data" => $Permission], 200);
     }
 
     /**
@@ -33,9 +25,13 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PermissionRequest $request)
     {
-        //
+        $Permission = new Permission;
+        $Permission->name = $request->name;
+        $Permission->save();
+
+        return response()->json(["data" => $Permission], 201);
     }
 
     /**
@@ -47,18 +43,7 @@ class PermissionController extends Controller
     public function show($id)
     {
         $Permission = Permission::findOrFail($id);
-        echo $Permission;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $Permission], 200);
     }
 
     /**
@@ -68,9 +53,13 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PermissionRequest $request, $id)
     {
-        //
+        $Permission = Permission::findOrFail($id);
+        $Permission->name = $request->name;
+        $Permission->save();
+
+        return response()->json(["data" => $Permission], 200);
     }
 
     /**
@@ -81,6 +70,9 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Permission = Permission::findOrFail($id);
+        $Permission->delete();
+
+        return response()->json(["data" => $Permission], 200);
     }
 }

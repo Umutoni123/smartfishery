@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\fishtypes;
 use Illuminate\Http\Request;
 
 class FishtypesController extends Controller
@@ -13,18 +14,8 @@ class FishtypesController extends Controller
      */
     public function index()
     {
-        $Fishtypes = Fishtypes::all();
-        echo $Fishtypes;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $Fishtypes = fishtypes::all();
+        return response()->json(["data" => $Fishtypes], 200);
     }
 
     /**
@@ -35,7 +26,11 @@ class FishtypesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Fishtypes = new fishtypes;
+        $Fishtypes->Fish_type = $request->Fish_type;
+        $Fishtypes->save();
+
+        return response()->json(["data" => $Fishtypes], 201);
     }
 
     /**
@@ -47,18 +42,7 @@ class FishtypesController extends Controller
     public function show($id)
     {
         $Fishtypes = Fishtypes::findOrFail($id);
-        echo $Fishtypes;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $Fishtypes], 200);
     }
 
     /**
@@ -70,7 +54,11 @@ class FishtypesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Fishtypes = Fishtypes::findOrFail($id);
+        $Fishtypes->Fish_type = $request->Fish_type;
+        $Fishtypes->save();
+
+        return response()->json(["data" => $Fishtypes], 200);
     }
 
     /**
@@ -81,6 +69,9 @@ class FishtypesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Fishtypes = Fishtypes::findOrFail($id);
+        $Fishtypes->delete();
+
+        return response()->json(["data" => $Fishtypes], 200);
     }
 }

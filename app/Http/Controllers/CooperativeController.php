@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CooperativesRequest;
 use App\Models\Cooperative;
 
 class CooperativeController extends Controller
@@ -16,17 +16,7 @@ class CooperativeController extends Controller
     {
         //
         $cooperatives = Cooperative::all();
-        echo $cooperatives;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(["data" => $cooperatives], 200);
     }
 
     /**
@@ -35,9 +25,16 @@ class CooperativeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CooperativesRequest $request)
     {
-        //
+        $cooperative = new Cooperative;
+        $cooperative->cooperativename = $request->cooperativename;
+        $cooperative->description = $request->description;
+        $cooperative->contact = $request->contact;
+        $cooperative->locationid = $request->locationid;
+        $cooperative->save();
+
+        return response()->json(["data" => $cooperative], 201);
     }
 
     /**
@@ -50,18 +47,7 @@ class CooperativeController extends Controller
     {
         //
         $cooperative = Cooperative::findOrFail($id);
-        echo $cooperative;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $cooperative], 200);
     }
 
     /**
@@ -71,9 +57,16 @@ class CooperativeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CooperativesRequest $request, $id)
     {
-        //
+        $cooperative = Cooperative::findOrFail($id);
+        $cooperative->cooperativename = $request->cooperativename;
+        $cooperative->description = $request->description;
+        $cooperative->contact = $request->contact;
+        $cooperative->locationid = $request->locationid;
+        $cooperative->save();
+
+        return response()->json(["data" => $cooperative], 201);
     }
 
     /**
@@ -85,5 +78,8 @@ class CooperativeController extends Controller
     public function destroy($id)
     {
         //
+        $cooperative = Cooperative::findOrFail($id);
+        $cooperative->delete();
+        return response()->json(["data" => $cooperative], 200);
     }
 }

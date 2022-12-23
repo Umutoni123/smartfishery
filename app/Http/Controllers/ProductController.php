@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,17 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $Product = Product::all();
-        echo $Product;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(["data" => $Product], 200);
     }
 
     /**
@@ -33,9 +25,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $Product = new Product;
+        $Product->name = $request->name;
+        $Product->save();
+
+        return response()->json(["data" => $Product], 201);
     }
 
     /**
@@ -47,18 +43,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $Product = Product::findOrFail($id);
-        echo $Product;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $Product], 200);
     }
 
     /**
@@ -68,9 +53,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $Product = Product::findOrFail($id);
+        $Product->name = $request->name;
+        $Product->save();
+
+        return response()->json(["data" => $Product], 200);
     }
 
     /**
@@ -81,6 +70,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Product = Product::findOrFail($id);
+        $Product->delete();
+
+        return response()->json(["data" => $Product], 200);
     }
 }

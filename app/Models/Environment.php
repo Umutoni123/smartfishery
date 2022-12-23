@@ -9,9 +9,7 @@ class Environment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Env_Id','Temperature', 'pH','Pond_Id','Fishponds','Fish_Id','coop_ID'
-   ];
+        'Env_Id', 'Temperature', 'pH', 'Pond_Id', 'Fishponds', 'Fish_Id', 'coop_ID'
+    ];
+    protected $primaryKey = 'Env_Id';
 }
-
-           
-           
