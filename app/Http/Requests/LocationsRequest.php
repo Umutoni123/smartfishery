@@ -26,11 +26,11 @@ class LocationsRequest extends FormRequest
     public function rules()
     {
         return [
-            'Location_name' => 'required',
-            'Province' => 'required',
-            'District' => 'required',
-            'Sector' => 'required',
-            'Cell' => 'required'
+            'Location_name' => 'required|string|max:255',
+            'Province' => 'required|string|max:255',
+            'District' => 'required|string|max:255',
+            'Sector' => 'required|string|max:255',
+            'Cell' => 'required|string|max:255'
         ];
     }
 

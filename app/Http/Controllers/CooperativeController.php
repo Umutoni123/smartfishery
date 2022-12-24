@@ -6,7 +6,7 @@ use App\Http\Requests\CooperativesRequest;
 use App\Models\Cooperative;
 
 class CooperativeController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *

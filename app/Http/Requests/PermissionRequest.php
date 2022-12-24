@@ -26,8 +26,8 @@ class PermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'Perm_detail' => 'required',
-            'role_Id' => 'required',
+            'Perm_detail' => 'required|string|max:255',
+            'role_Id' => 'required|integer',
         ];
     }
 

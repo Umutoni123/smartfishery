@@ -26,10 +26,10 @@ class RecommendedTreatmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'treatment_name' => 'required',
-            'details' => 'required',
-            'medications' => 'required',
-            'Diseases_Id' => 'required',
+            'treatment_name' => 'required|string|max:255',
+            'details' => 'required|string|max:255',
+            'medications' => 'required|string|max:255',
+            'Diseases_Id' => 'required|integer',
         ];
     }
 

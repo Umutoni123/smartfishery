@@ -6,17 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProductRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
-    //     /**
-    //      * Determine if the user is authorized to make this request.
-    //      *
-    //      * @return bool
-    //      */
-    //     public function authorize()
-    //     {
-    //         return false;
-    //     }
+    // /**
+    //  * Determine if the user is authorized to make this request.
+    //  *
+    //  * @return bool
+    //  */
+    // public function authorize()
+    // {
+    //     return false;
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -26,9 +26,9 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'tones' => 'required|string|max:255',
-            'coop_ID' => 'required|integer',
-            'Env_Id' => 'required|integer',
+            'name' => 'string|max:255',
+            'email' => 'string|email|max:255|unique:users',
+            'password' => 'string|min:6',
         ];
     }
 

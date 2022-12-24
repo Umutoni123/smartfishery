@@ -26,8 +26,8 @@ class FishPondsRequest extends FormRequest
     public function rules()
     {
         return [
-            'Pond_name' => 'required',
-            'locationi' => 'required',
+            'Pond_name' => 'required|string|max:255',
+            'locationi' => 'required|integer',
         ];
     }
 

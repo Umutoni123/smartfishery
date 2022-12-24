@@ -6,7 +6,7 @@ use App\Http\Requests\FishPondsRequest;
 use App\Models\fishponds;
 
 class FishpondsController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *

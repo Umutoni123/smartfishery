@@ -26,10 +26,10 @@ class FishdiseasesRequest extends FormRequest
     public function rules()
     {
         return [
-            'Disease_name' => 'required',
-            'Pond_Id' => 'required',
-            'Fish_Id' => 'required',
-            'Location_ID' => 'required',
+            'Disease_name' => 'required|string|max:255',
+            'Pond_Id' => 'required"integer',
+            'Fish_Id' => 'required|integer',
+            'Location_ID' => 'required|integer',
         ];
     }
 
