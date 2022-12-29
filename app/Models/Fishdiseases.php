@@ -9,7 +9,8 @@ class Fishdiseases extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'Diseases_Id', 'Disease_name', 'Pond_Id', 'Fish_Id', 'Location_ID'
+        'Diseases_Id', 'Disease_name',
+        //  'Pond_Id', 'Fish_Id', 'Location_ID'
     ];
     protected $primaryKey = 'Diseases_Id';
 }

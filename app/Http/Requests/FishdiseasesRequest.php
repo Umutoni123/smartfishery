@@ -27,9 +27,9 @@ class FishdiseasesRequest extends FormRequest
     {
         return [
             'Disease_name' => 'required|string|max:255',
-            'Pond_Id' => 'required"integer',
-            'Fish_Id' => 'required|integer',
-            'Location_ID' => 'required|integer',
+            // 'Pond_Id' => 'required"integer',
+            // 'Fish_Id' => 'required|integer',
+            // 'Location_ID' => 'required|integer',
         ];
     }
 

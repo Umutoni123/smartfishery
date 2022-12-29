@@ -27,7 +27,7 @@ class FishTypesRequest extends FormRequest
     {
         return [
             'fish_name' => 'required|string|max:255',
-            'coopid' => 'required|integer',
+            // 'coopid' => 'required|integer',
         ];
     }
 

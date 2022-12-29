@@ -26,9 +26,13 @@ class FishdiseasesController extends Controller
      */
     public function store(FishdiseasesRequest $request)
     {
+        $Fishdiseases = Fishdiseases::where('Disease_name', $request->Disease_name)->first();
+        if ($Fishdiseases) {
+            return response()->json(["message" => "Fish disease already exists"], 400);
+        }
+
         $Fishdiseases = new Fishdiseases;
         $Fishdiseases->Disease_name = $request->Disease_name;
-        $Fishdiseases->Disease_description = $request->Disease_description;
         $Fishdiseases->save();
 
         return response()->json(["data" => $Fishdiseases], 201);
@@ -55,9 +59,13 @@ class FishdiseasesController extends Controller
      */
     public function update(FishdiseasesRequest $request, $id)
     {
+        $Fishdiseases = Fishdiseases::where('Disease_name', $request->Disease_name)->first();
+        if ($Fishdiseases) {
+            return response()->json(["message" => "Fish disease already exists"], 400);
+        }
+
         $Fishdiseases = Fishdiseases::findOrFail($id);
         $Fishdiseases->Disease_name = $request->Disease_name;
-        $Fishdiseases->Disease_description = $request->Disease_description;
         $Fishdiseases->save();
 
         return response()->json(["data" => $Fishdiseases], 200);

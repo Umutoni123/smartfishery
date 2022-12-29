@@ -10,6 +10,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Recommended_treattmentController;
+use App\Http\Controllers\RecordingsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\userrolesController;
 use Illuminate\Http\Request;
@@ -39,7 +40,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('Fishponds', FishpondsController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
-])->middleware('auth:api');
+])->middleware('auth:api')  ;
 
 Route::resource('Location', LocationController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
@@ -79,4 +80,8 @@ Route::resource('Product', ProductController::class)->only([
 
 Route::resource('users', UserController::class)->only([
     'index', 'destroy', 'show', 'update'
+])->middleware('auth:api');
+
+Route::resource('recordings', RecordingsController::class)->only([
+    'index', 'store', 'destroy', 'show', 'update'
 ])->middleware('auth:api');

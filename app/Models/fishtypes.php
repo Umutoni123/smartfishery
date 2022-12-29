@@ -9,7 +9,8 @@ class fishtypes extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'fish_name','coopid'
+        'fish_name',
+        // 'coopid'
    ];
 }
 

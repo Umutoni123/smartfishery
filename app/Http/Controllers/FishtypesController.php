@@ -26,8 +26,13 @@ class FishtypesController extends Controller
      */
     public function store(Request $request)
     {
+        $Fishtypes = fishtypes::where('fish_name', $request->fish_name)->first();
+        if ($Fishtypes) {
+            return response()->json(["message" => "Fish name already exists"], 400);
+        }
         $Fishtypes = new fishtypes;
-        $Fishtypes->Fish_type = $request->Fish_type;
+        $Fishtypes->fish_name = $request->fish_name;
+        // $Fishtypes->coopid = $request->coopid;
         $Fishtypes->save();
 
         return response()->json(["data" => $Fishtypes], 201);
@@ -54,8 +59,15 @@ class FishtypesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $Fishtypes = fishtypes::where('fish_name', $request->fish_name)->first();
+        if ($Fishtypes) {
+            return response()->json(["message" => "Fish name already exists"], 400);
+        }
+
         $Fishtypes = Fishtypes::findOrFail($id);
-        $Fishtypes->Fish_type = $request->Fish_type;
+
+        $Fishtypes->fish_name = $request->fish_name;
+        // $Fishtypes->coopid = $request->coopid;
         $Fishtypes->save();
 
         return response()->json(["data" => $Fishtypes], 200);
