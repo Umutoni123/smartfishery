@@ -9,7 +9,7 @@ use App\Http\Controllers\FishtypesController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Recommended_treattmentController;
+use App\Http\Controllers\RecommendedTreatmentController;
 use App\Http\Controllers\RecordingsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\userrolesController;
@@ -62,7 +62,7 @@ Route::resource('userroles', userrolesController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
-Route::resource('recommended_treatment', Recommended_treattmentController::class)->only([
+Route::resource('recommended_treatment', RecommendedTreatmentController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
