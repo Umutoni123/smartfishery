@@ -29,7 +29,7 @@ class RecommendedTreatmentRequest extends FormRequest
             'treatment_name' => 'required|string|max:255',
             'details' => 'required|string|max:255',
             'medications' => 'required|string|max:255',
-            'Diseases_Id' => 'required|integer',
+            // 'Diseases_Id' => 'required|integer',
         ];
     }
 

@@ -9,7 +9,8 @@ class recommended_treatment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'treat_Id', 'treatment_name', 'details', 'medications', 'Diseases_Id'
+        'treat_Id', 'treatment_name', 'details', 'medications'
+        // , 'Diseases_Id'
 
     ];
     protected $primaryKey = 'treat_Id';

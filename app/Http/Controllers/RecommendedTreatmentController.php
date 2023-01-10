@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\RecommendedTreatmentRequest;
 use App\Models\recommended_treatment;
-use Illuminate\Http\Request;
 
-class Recommended_treattmentController extends Controller
+class RecommendedTreatmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +28,9 @@ class Recommended_treattmentController extends Controller
     public function store(RecommendedTreatmentRequest $request)
     {
         $Recommended_treatment = new recommended_treatment;
-        $Recommended_treatment->Recommended_treatment = $request->Recommended_treatment;
+        $Recommended_treatment->treatment_name = $request->treatment_name;
+        $Recommended_treatment->details = $request->details;
+        $Recommended_treatment->medications = $request->medications;
         $Recommended_treatment->save();
 
         return response()->json(["data" => $Recommended_treatment], 201);
@@ -56,7 +58,9 @@ class Recommended_treattmentController extends Controller
     public function update(RecommendedTreatmentRequest $request, $id)
     {
         $Recommended_treatment = Recommended_treatment::findOrFail($id);
-        $Recommended_treatment->Recommended_treatment = $request->Recommended_treatment;
+        $Recommended_treatment->treatment_name = $request->treatment_name;
+        $Recommended_treatment->details = $request->details;
+        $Recommended_treatment->medications = $request->medications;
         $Recommended_treatment->save();
 
         return response()->json(["data" => $Recommended_treatment], 200);
