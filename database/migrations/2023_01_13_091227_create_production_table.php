@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocationsTable extends Migration
+class CreateProductionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('locations', function (Blueprint $table) {
+        Schema::create('production', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Location_name');
-            $table->string('Province');
-            $table->string('District');
-            $table->string('Sector');
-            $table->string('Cell');
+            $table->unsignedBigInteger('production_tons');
+            $table->unsignedInteger('environment_id');
+           $table->foreign('environment_id')->references('id')->on('pond_environments')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('production');
     }
 }

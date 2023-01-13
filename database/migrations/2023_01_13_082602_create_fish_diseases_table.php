@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermissionsTable extends Migration
+class CreateFishdiseasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
-            $table->id('Perm_Id');
-            $table->string('Perm_detail');
-            //$table->foreign('role_Id')
-            //->references('id')->on('userroles')->onDelete('cascade');
+        Schema::create('fish_diseases', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('symptoms');
+            $table->string('medication');
+            $table->string('medication_details');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('fish_diseases');
     }
 }

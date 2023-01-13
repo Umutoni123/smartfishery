@@ -15,12 +15,11 @@ class CreateCooperativesTable extends Migration
     {
         Schema::create('cooperatives', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('cooperativename');
+            $table->string('name');
             $table->text('description');
-            $table->string('contact'); 
-            $table->timestamps(); 
-            $table->unsignedInteger('locationid');
-            $table->foreign('locationid')->references('id')->on('locations')->onDelete('cascade');
+            $table->string('contact');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
         });
     }
 
