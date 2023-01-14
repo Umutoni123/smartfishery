@@ -27,8 +27,8 @@ class FishpondsController extends Controller
     public function store(FishPondsRequest $request)
     {
         $Fishponds = new fishponds;
-        $Fishponds->Pond_name = $request->Pond_name;
-        $Fishponds->locationi = $request->locationi;
+        $Fishponds->name = $request->name;
+        $Fishponds->cooperative_id = $request->cooperative_id;
         $Fishponds->save();
 
         return response()->json(["data" => $Fishponds], 201);
@@ -56,9 +56,8 @@ class FishpondsController extends Controller
     public function update(FishPondsRequest $request, $id)
     {
         $Fishponds = Fishponds::findorFail($id);
-        $Fishponds->Pond_name = $request->Pond_name;
-        $Fishponds->locationi = $request->locationi;
-        // save with Pond_Id = $id
+        $Fishponds->name = $request->name;
+        $Fishponds->cooperative_id = $request->cooperative_id;
         $Fishponds->save();
 
         return response()->json(["data" => $Fishponds], 200);

@@ -10,6 +10,6 @@ class Cooperative extends Model
     use HasFactory;
 
     protected $fillable = [
-         'cooperativename', 'description','contact','locationid'
+        'id', 'name', 'description','contact'
     ];
 }

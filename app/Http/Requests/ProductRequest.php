@@ -26,9 +26,8 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'tones' => 'required|string|max:255',
-            'coop_ID' => 'required|integer',
-            'Env_Id' => 'required|integer',
+            'production_tons' => 'required|numeric',
+            'environment_id' => 'required|integer|exists:pond_environments,id',
         ];
     }
 

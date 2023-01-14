@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class FishdiseasesRequest extends FormRequest
+class FishPondDiseasesRequest extends FormRequest
 {
     // /**
     //  * Determine if the user is authorized to make this request.
@@ -26,10 +26,9 @@ class FishdiseasesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:fish_diseases',
-            'symptoms' => 'required|string|max:255',
-            'medication' => 'required|string|max:255',
-            'medication_details' => 'required|string|max:255',
+            'pond_id' => 'required|integer|exists:fish_ponds,id',
+            'fish_disease' => 'required|integer|exists:fish_diseases,id',
+            'status' => 'required|string|max:255|in:active,inactive',
         ];
     }
 

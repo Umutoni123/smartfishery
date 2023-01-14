@@ -17,9 +17,9 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('full_name');
             $table->string('email')->unique();
-            $table->timestamp('phone_number')->unique();
+            $table->string('phone_number')->unique();
             $table->string('password');
-            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('role_id')->nullable();
             $table->foreign('role_id')->references('id')->on('user_roles')->onDelete('cascade');
             $table->enum('type', ['admin', 'cooperativemanager', 'rab']);
             $table->timestamps();

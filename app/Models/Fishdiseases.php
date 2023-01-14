@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Fishdiseases extends Model
 {
     use HasFactory;
+    protected $table = 'fish_diseases';
     protected $fillable = [
-        'Diseases_Id', 'Disease_name',
-        //  'Pond_Id', 'Fish_Id', 'Location_ID'
+        'id','name','symptoms','medication','medication_details',
     ];
     protected $primaryKey = 'Diseases_Id';
 }

@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Environment extends Model
 {
     use HasFactory;
+    protected $table = 'pond_environments';
     protected $fillable = [
-        'Env_Id', 'Temperature', 'pH', 'Pond_Id', 'Fishponds', 'Fish_Id', 'coop_ID'
+        'id', 'temperature', 'ph', 'pond_id', 'fish_type'
     ];
     protected $primaryKey = 'Env_Id';
 }

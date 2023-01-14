@@ -6,7 +6,7 @@ use App\Http\Requests\CooperativesRequest;
 use App\Models\Cooperative;
 
 class CooperativeController extends Controller
-{   
+{
     /**
      * Display a listing of the resource.
      *
@@ -28,10 +28,9 @@ class CooperativeController extends Controller
     public function store(CooperativesRequest $request)
     {
         $cooperative = new Cooperative;
-        $cooperative->cooperativename = $request->cooperativename;
+        $cooperative->name = $request->name;
         $cooperative->description = $request->description;
         $cooperative->contact = $request->contact;
-        $cooperative->locationid = $request->locationid;
         $cooperative->save();
 
         return response()->json(["data" => $cooperative], 201);
@@ -60,10 +59,17 @@ class CooperativeController extends Controller
     public function update(CooperativesRequest $request, $id)
     {
         $cooperative = Cooperative::findOrFail($id);
-        $cooperative->cooperativename = $request->cooperativename;
+        $cooperative->name = $request->name;
         $cooperative->description = $request->description;
         $cooperative->contact = $request->contact;
-        $cooperative->locationid = $request->locationid;
+
+        if ($request->status) {
+            if (auth()->user()->role !== 'admin') {
+                return response()->json(["message" => "You are not authorized to perform this action"], 401);
+            }
+            $cooperative->status = $request->status;
+        }
+
         $cooperative->save();
 
         return response()->json(["data" => $cooperative], 201);

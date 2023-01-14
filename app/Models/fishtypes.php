@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class fishtypes extends Model
 {
     use HasFactory;
+    protected $table = 'fish_types';
     protected $fillable = [
+        'id',
         'fish_name',
-        // 'coopid'
    ];
 }
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LocationsRequest;
 use App\Models\Locations;
-use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
@@ -28,11 +27,11 @@ class LocationController extends Controller
     public function store(LocationsRequest $request)
     {
         $Location = new Locations;
-        $Location->Location_name = $request->Location_name;
-        $Location->Province = $request->Province;
-        $Location->District = $request->District;
-        $Location->Sector = $request->Sector;
-        $Location->Cell = $request->Cell;
+        $Location->location_name = $request->location_name;
+        $Location->province = $request->province;
+        $Location->district = $request->district;
+        $Location->sector = $request->sector;
+        $Location->cell = $request->cell;
         $Location->save();
 
         return response()->json(["data" => $Location], 201);
@@ -60,11 +59,11 @@ class LocationController extends Controller
     public function update(LocationsRequest $request, $id)
     {
         $Location = Locations::findOrFail($id);
-        $Location->Location_name = $request->Location_name;
-        $Location->Province = $request->Province;
-        $Location->District = $request->District;
-        $Location->Sector = $request->Sector;
-        $Location->Cell = $request->Cell;
+        $Location->location_name = $request->location_name;
+        $Location->province = $request->province;
+        $Location->district = $request->district;
+        $Location->sector = $request->sector;
+        $Location->cell = $request->cell;
         $Location->save();
 
         return response()->json(["data" => $Location], 200);

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class PondDiseases extends Model
 {
     use HasFactory;
+    protected $table = 'pond_diseases';
     protected $fillable = [
-        'prod_Id', 'tones', 'coop_ID', 'Env_Id'
+        'id', 'pond_id', 'fish_disease', 'status'
     ];
-    protected $primaryKey = 'prod_Id';
 }

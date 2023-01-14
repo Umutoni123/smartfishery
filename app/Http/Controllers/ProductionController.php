@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
-use App\Models\Product;
+use App\Models\Production;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $Product = Product::all();
-        return response()->json(["data" => $Product], 200);
+        $Production = Production::all();
+        return response()->json(["data" => $Production], 200);
     }
 
     /**
@@ -27,11 +27,12 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $Product = new Product;
-        $Product->name = $request->name;
-        $Product->save();
+        $Production = new Production;
+        $Production->production_tons = $request->production_tons;
+        $Production->environment_id = $request->environment_id;
+        $Production->save();
 
-        return response()->json(["data" => $Product], 201);
+        return response()->json(["data" => $Production], 201);
     }
 
     /**
@@ -42,8 +43,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $Product = Product::findOrFail($id);
-        return response()->json(["data" => $Product], 200);
+        $Production = Production::findOrFail($id);
+        return response()->json(["data" => $Production], 200);
     }
 
     /**
@@ -55,11 +56,12 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        $Product = Product::findOrFail($id);
-        $Product->name = $request->name;
-        $Product->save();
+        $Production = Production::findOrFail($id);
+        $Production->production_tons = $request->production_tons;
+        $Production->environment_id = $request->environment_id;
+        $Production->save();
 
-        return response()->json(["data" => $Product], 200);
+        return response()->json(["data" => $Production], 200);
     }
 
     /**
@@ -70,9 +72,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $Product = Product::findOrFail($id);
-        $Product->delete();
+        $Production = Production::findOrFail($id);
+        $Production->delete();
 
-        return response()->json(["data" => $Product], 200);
+        return response()->json(["data" => $Production], 200);
     }
 }

@@ -26,10 +26,10 @@ class CooperativesRequest extends FormRequest
     public function rules()
     {
         return [
-            'cooperativename' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'contact' => 'required|string|max:255',
-            'locationid' => 'required|integer',
+            'status' => 'string|max:255|in:active,inactive',
         ];
     }
 

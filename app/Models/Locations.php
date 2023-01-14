@@ -9,7 +9,7 @@ class Locations extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id','Location_name','Province','District','Sector','Cell'
+        'id','location_name','province','district','sector','cell'
    ];
     
 }

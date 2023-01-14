@@ -19,6 +19,7 @@ class CreatePonddiseasesTable extends Migration
             $table->foreign('pond_id')->references('id')->on('fish_ponds')->onDelete('cascade');
             $table->unsignedInteger('fish_disease');
             $table->foreign('fish_disease')->references('id')->on('fish_diseases')->onDelete('cascade');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

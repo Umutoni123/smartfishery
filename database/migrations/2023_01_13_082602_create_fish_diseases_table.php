@@ -15,7 +15,7 @@ class CreateFishdiseasesTable extends Migration
     {
         Schema::create('fish_diseases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('symptoms');
             $table->string('medication');
             $table->string('medication_details');

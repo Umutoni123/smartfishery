@@ -28,7 +28,9 @@ class userrolesController extends Controller
     public function store(UserRolesRequest $request)
     {
         $userroles = new userroles;
-        $userroles->role = $request->role;
+        $userroles->role_name = $request->role_name;
+        $userroles->location_id = $request->location_id;
+        $userroles->cooperative_id = $request->cooperative_id;
         $userroles->save();
 
         return response()->json(["data" => $userroles], 201);
@@ -56,7 +58,9 @@ class userrolesController extends Controller
     public function update(UserRolesRequest $request, $id)
     {
         $userroles = userroles::findOrFail($id);
-        $userroles->role = $request->role;
+        $userroles->role_name = $request->role_name;
+        $userroles->location_id = $request->location_id;
+        $userroles->cooperative_id = $request->cooperative_id;
         $userroles->save();
 
         return response()->json(["data" => $userroles], 200);

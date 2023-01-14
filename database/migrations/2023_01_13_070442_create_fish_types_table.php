@@ -15,7 +15,7 @@ class CreateFishtypesTable extends Migration
     {
         Schema::create('fish_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('fish_name');
+            $table->string('fish_name')->unique();
             $table->timestamps();
         });
     }

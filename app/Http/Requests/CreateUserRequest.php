@@ -6,17 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RecommendedTreatmentRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
-    //     /**
-    //      * Determine if the user is authorized to make this request.
-    //      *
-    //      * @return bool
-    //      */
-    //     public function authorize()
-    //     {
-    //         return false;
-    //     }
+    // /**
+    //  * Determine if the user is authorized to make this request.
+    //  *
+    //  * @return bool
+    //  */
+    // public function authorize()
+    // {
+    //     return false;
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -26,10 +26,11 @@ class RecommendedTreatmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'treatment_name' => 'required|string|max:255',
-            'details' => 'required|string|max:255',
-            'medications' => 'required|string|max:255',
-            // 'Diseases_Id' => 'required|integer',
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone_number' => 'required|string|max:255|unique:users',
+            'role_id' => 'required|integer|exists:user_roles,id',
+            'password' => 'required|string|min:6',
         ];
     }
 

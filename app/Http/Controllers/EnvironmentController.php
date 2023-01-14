@@ -15,17 +15,7 @@ class EnvironmentController extends Controller
     public function index()
     {
         $Environment = Environment::all();
-        echo $Environment;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(["data" => $Environment], 200);
     }
 
     /**
@@ -36,7 +26,14 @@ class EnvironmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Environment = new Environment;
+        $Environment->temperature = $request->temperature;
+        $Environment->ph = $request->ph;
+        $Environment->pond_id = $request->pond_id;
+        $Environment->fish_type = $request->fish_type;
+        $Environment->save();
+
+        return response()->json(["data" => $Environment], 201);
     }
 
     /**
@@ -48,18 +45,7 @@ class EnvironmentController extends Controller
     public function show($id)
     {
         $Environment = Environment::findOrFail($id);
-        echo $Environment;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json(["data" => $Environment], 200);
     }
 
     /**
@@ -71,7 +57,15 @@ class EnvironmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Environment = Environment::findOrFail($id);
+
+        $Environment->temperature = $request->temperature;
+        $Environment->ph = $request->ph;
+        $Environment->pond_id = $request->pond_id;
+        $Environment->fish_type = $request->fish_type;
+        $Environment->save();
+
+        return response()->json(["data" => $Environment], 200);
     }
 
     /**
@@ -82,6 +76,9 @@ class EnvironmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Environment = Environment::findOrFail($id);
+        $Environment->delete();
+
+        return response()->json(["data" => $Environment], 200);
     }
 }

@@ -26,8 +26,9 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:255',
+            'full_name' => 'string|max:255',
             'email' => 'string|email|max:255|unique:users',
+            'phone_number' => 'string|max:255|unique:users',
             'password' => 'string|min:6',
         ];
     }

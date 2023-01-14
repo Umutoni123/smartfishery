@@ -4,12 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CooperativeController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\FishdiseasesController;
+use App\Http\Controllers\FishPondDiseasesController;
 use App\Http\Controllers\FishpondsController;
 use App\Http\Controllers\FishtypesController;
 use App\Http\Controllers\LocationController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RecommendedTreatmentController;
+use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\RecordingsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\userrolesController;
@@ -29,7 +28,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
-    Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
 });
@@ -38,11 +36,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('Fishponds', FishpondsController::class)->only([
+Route::resource('fishponds', FishpondsController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api')  ;
 
-Route::resource('Location', LocationController::class)->only([
+Route::resource('locations', LocationController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
@@ -54,7 +52,7 @@ Route::resource('fishtypes', FishtypesController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
-Route::resource('Fishdiseases', FishdiseasesController::class)->only([
+Route::resource('fishdiseases', FishdiseasesController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
@@ -62,24 +60,24 @@ Route::resource('userroles', userrolesController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
-Route::resource('recommended_treatment', RecommendedTreatmentController::class)->only([
+Route::resource('pond_environments', EnvironmentController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
-Route::resource('Permission', PermissionController::class)->only([
+Route::resource('pond_diseases', FishPondDiseasesController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
-Route::resource('Environment', EnvironmentController::class)->only([
-    'index', 'destroy', 'show', 'store', 'update'
-])->middleware('auth:api');
-
-Route::resource('Product', ProductController::class)->only([
+Route::resource('production', ProductionController::class)->only([
     'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
 Route::resource('users', UserController::class)->only([
-    'index', 'destroy', 'show', 'update'
+    'index', 'destroy', 'store', 'show', 'update'
+])->middleware('auth:api');
+
+Route::resource('user_roles', userrolesController::class)->only([
+    'index', 'destroy', 'show', 'store', 'update'
 ])->middleware('auth:api');
 
 Route::resource('recordings', RecordingsController::class)->only([

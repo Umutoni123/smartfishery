@@ -6,17 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class PermissionRequest extends FormRequest
+class PondEnvironmentRequest extends FormRequest
 {
-//     /**
-//      * Determine if the user is authorized to make this request.
-//      *
-//      * @return bool
-//      */
-//     public function authorize()
-//     {
-//         return false;
-//     }
+    // /**
+    //  * Determine if the user is authorized to make this request.
+    //  *
+    //  * @return bool
+    //  */
+    // public function authorize()
+    // {
+    //     return false;
+    // }
 
     /**
      * Get the validation rules that apply to the request.
@@ -26,8 +26,10 @@ class PermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'Perm_detail' => 'required|string|max:255',
-            'role_Id' => 'required|integer',
+            'temperature' => 'required|numeric',
+            'ph' => 'required|numeric',
+            'pond_id' => 'required|integer|exists:fish_ponds,id',
+            'fish_type' => 'required|integer|exists:fish_types,id',
         ];
     }
 
