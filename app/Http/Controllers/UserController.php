@@ -52,7 +52,6 @@ class UserController extends Controller
         $User->email = $request->email;
         $User->phone_number = $request->phone_number;
         $User->password = bcrypt($request->password);
-        $User->role_id = $request->role_id;
         $User->type = 'cooperativemanager';
         $User->save();
 

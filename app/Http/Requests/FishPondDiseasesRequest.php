@@ -28,7 +28,7 @@ class FishPondDiseasesRequest extends FormRequest
         return [
             'pond_id' => 'required|integer|exists:fish_ponds,id',
             'fish_disease' => 'required|integer|exists:fish_diseases,id',
-            'status' => 'required|string|max:255|in:active,inactive',
+            'status' => 'string|max:255|in:active,inactive',
         ];
     }
 

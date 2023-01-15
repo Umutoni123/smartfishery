@@ -31,6 +31,7 @@ class CooperativeController extends Controller
         $cooperative->name = $request->name;
         $cooperative->description = $request->description;
         $cooperative->contact = $request->contact;
+        $cooperative->status = 'active';
         $cooperative->save();
 
         return response()->json(["data" => $cooperative], 201);
@@ -64,7 +65,7 @@ class CooperativeController extends Controller
         $cooperative->contact = $request->contact;
 
         if ($request->status) {
-            if (auth()->user()->role !== 'admin') {
+            if ($request->user()->type == 'cooperativemanager') {
                 return response()->json(["message" => "You are not authorized to perform this action"], 401);
             }
             $cooperative->status = $request->status;

@@ -15,11 +15,12 @@ class CreateUserRolesTable extends Migration
     {
         Schema::create('user_roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('role_name');
             $table->unsignedInteger('location_id');
             $table->unsignedInteger('cooperative_id');
+            $table->unsignedInteger('user_id');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->foreign('cooperative_id')->references('id')->on('cooperatives')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

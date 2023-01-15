@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Models\Environment;
+use App\Models\fishponds;
 use App\Models\Production;
+use App\Models\userroles;
 use Illuminate\Http\Request;
 
 class ProductionController extends Controller
@@ -13,10 +16,18 @@ class ProductionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
+        if ($req->user()->type == 'cooperativemanager') {
+            $userroles = userroles::where('user_id', $req->user()->id)->first();
+            $Fishponds = fishponds::where('cooperative_id', $userroles->cooperative_id)->select()->get();
+            $Environment = Environment::whereIn('pond_id', $Fishponds->pluck('id'))->get();
+            $Production = Production::whereIn('environment_id', $Environment->pluck('id'))->get();
+            return response()->json(["data" => $Production], 200);
+        } else {
         $Production = Production::all();
         return response()->json(["data" => $Production], 200);
+        }
     }
 
     /**

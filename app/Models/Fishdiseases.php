@@ -12,5 +12,4 @@ class Fishdiseases extends Model
     protected $fillable = [
         'id','name','symptoms','medication','medication_details',
     ];
-    protected $primaryKey = 'Diseases_Id';
 }

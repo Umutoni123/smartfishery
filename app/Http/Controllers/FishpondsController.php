@@ -4,18 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FishPondsRequest;
 use App\Models\fishponds;
+use App\Models\userroles;
+use Illuminate\Http\Request;
 
 class FishpondsController extends Controller
-{   
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $Fishponds = fishponds::all();
-        return response()->json(["data" => $Fishponds], 200);
+        if ($req->user()->type == 'cooperativemanager') {
+            $userroles = userroles::where('user_id', $req->user()->id)->first();            
+            $Fishponds = fishponds::where('cooperative_id', $userroles->cooperative_id)->get();
+            return response()->json(["data" => $Fishponds], 200);
+        } else {
+            $Fishponds = fishponds::all();
+            return response()->json(["data" => $Fishponds], 200);
+        }
     }
 
     /**

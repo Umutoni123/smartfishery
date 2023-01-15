@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Environment;
+use App\Models\fishponds;
+use App\Models\userroles;
 use Illuminate\Http\Request;
 
 class EnvironmentController extends Controller
@@ -12,10 +14,17 @@ class EnvironmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
+        if ($req->user()->type == 'cooperativemanager') {
+            $userroles = userroles::where('user_id', $req->user()->id)->first();
+            $Fishponds = fishponds::where('cooperative_id', $userroles->cooperative_id)->select()->get();
+            $Environment = Environment::whereIn('pond_id', $Fishponds->pluck('id'))->get();
+            return response()->json(["data" => $Environment], 200);
+        } else {
         $Environment = Environment::all();
         return response()->json(["data" => $Environment], 200);
+        }
     }
 
     /**

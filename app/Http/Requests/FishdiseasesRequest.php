@@ -26,10 +26,11 @@ class FishdiseasesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:fish_diseases',
+            'name' => 'required|string|max:255|unique:fish_diseases,name,'.$this->id,
             'symptoms' => 'required|string|max:255',
             'medication' => 'required|string|max:255',
             'medication_details' => 'required|string|max:255',
+            'id' => 'integer'
         ];
     }
 

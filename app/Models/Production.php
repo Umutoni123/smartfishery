@@ -12,5 +12,4 @@ class Production extends Model
     protected $fillable = [
         'id', 'production_tons', 'environment_id'
     ];
-    protected $primaryKey = 'prod_Id';
 }

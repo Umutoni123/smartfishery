@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FishPondsRequest;
+use App\Http\Requests\FishPondDiseasesRequest;
+use App\Models\fishponds;
 use App\Models\PondDiseases;
+use App\Models\userroles;
+use Illuminate\Http\Request;
 
 class FishPondDiseasesController extends Controller
 {   
@@ -12,10 +15,17 @@ class FishPondDiseasesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
+        if ($req->user()->type == 'cooperativemanager') {
+            $userroles = userroles::where('user_id', $req->user()->id)->first();
+            $Fishponds = fishponds::where('cooperative_id', $userroles->cooperative_id)->select()->get();
+            $PondDiseases = PondDiseases::whereIn('pond_id', $Fishponds->pluck('id'))->get();
+            return response()->json(["data" => $PondDiseases], 200);
+        } else {
         $PondDiseases = PondDiseases::all();
         return response()->json(["data" => $PondDiseases], 200);
+        }
     }
 
     /**
@@ -24,12 +34,12 @@ class FishPondDiseasesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FishPondsRequest $request)
+    public function store(FishPondDiseasesRequest $request)
     {
         $PondDiseases = new PondDiseases;
         $PondDiseases->pond_id = $request->pond_id;
         $PondDiseases->fish_disease = $request->fish_disease;
-        $PondDiseases->status = $request->status;
+        $PondDiseases->status = 'active';
         $PondDiseases->save();
 
         return response()->json(["data" => $PondDiseases], 201);
@@ -54,7 +64,7 @@ class FishPondDiseasesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FishPondsRequest $request, $id)
+    public function update(FishPondDiseasesRequest $request, $id)
     {
         $PondDiseases = PondDiseases::findorFail($id);
         $PondDiseases->pond_id = $request->pond_id;

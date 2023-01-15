@@ -26,7 +26,7 @@ class UserRolesRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_name' => 'required|string|max:255',
+            'user_id' => 'required|integer|exists:users,id',
             'location_id' => 'required|integer|exists:locations,id',
             'cooperative_id' => 'required|integer|exists:cooperatives,id',
         ];

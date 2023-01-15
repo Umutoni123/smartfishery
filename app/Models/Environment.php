@@ -12,5 +12,4 @@ class Environment extends Model
     protected $fillable = [
         'id', 'temperature', 'ph', 'pond_id', 'fish_type'
     ];
-    protected $primaryKey = 'Env_Id';
 }
