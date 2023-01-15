@@ -23,7 +23,3 @@ services:
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
-
-networks:
-  travellist:
-    driver: bridge
