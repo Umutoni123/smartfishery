@@ -7,8 +7,9 @@ services:
         uid: 1000
       context: ./
       dockerfile: Dockerfile
-    image: travellist
-    container_name: travellist-app
+    image: smartfishery
+    container_name: smartfishery-app
+    env_file: .env
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
@@ -17,7 +18,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: travellist-nginx
+    container_name: smartfishery-nginx
     restart: unless-stopped
     network_mode: "host"
     volumes:
