@@ -35,7 +35,7 @@ class NewRecording implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        error_log($this->recording);
+        error_log(env('PUSHER_APP_SECRET'));
         return new Channel('fishPond.' . $this->recording->fishPondId);
     }
 
