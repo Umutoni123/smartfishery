@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "php-open-source-saver/jwt-auth": "^2.0",
+        "pusher/pusher-php-server": "^7.2",
         "usmanhalalit/laracsv": "^2.1"
     },
     "require-dev": {

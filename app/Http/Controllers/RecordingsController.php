@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewRecording;
 use App\Http\Requests\RecordingsRequest;
 use App\Models\Recordings;
 use Laracsv\Export as LaracsvExport;
@@ -52,8 +53,12 @@ class RecordingsController extends Controller
         $Recordings->population = $request->population;
         $Recordings->fish_length = $request->fish_length;
         $Recordings->fish_weight = $request->fish_weight;
+        $Recordings->fishPondId = $request->fishPondId;
 
         $Recordings->save();
+
+
+        event(new NewRecording($Recordings));
 
         return response()->json(["data" => $Recordings], 201);
     }

@@ -9,7 +9,7 @@ class Recordings extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "entry_id", "temperature", "turbidity", "dissolved_oxygen", "ph", "ammonia", "nitrate", "population", "fish_length", "fish_weight"
+        "entry_id", "temperature", "turbidity", "dissolved_oxygen", "ph", "ammonia", "nitrate", "population", "fish_length", "fish_weight", "fishPondId"
     ];
     protected $primaryKey = 'entry_id';
 }
