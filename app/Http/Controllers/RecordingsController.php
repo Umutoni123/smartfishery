@@ -15,11 +15,12 @@ class RecordingsController extends Controller
      */
     public function index()
     {
+        // take 20 latest recordings, order by created_at desc
+        $Recordings = Recordings::all()->sortByDesc('created_at')->take(20);
+        return response()->json(["data" => $Recordings], 200);
         // $Recordings = Recordings::all();
-        // return response()->json(["data" => $Recordings], 200);
-        $Recordings = Recordings::all();
-        $csvExporter = new LaracsvExport();
-        $csvExporter->build($Recordings, ['entry_id', 'temperature', 'turbidity', 'dissolved_oxygen', 'ph', 'ammonia', 'nitrate', 'population', 'fish_length', 'fish_weight', 'created_at'])->download();
+        // $csvExporter = new LaracsvExport();
+        // $csvExporter->build($Recordings, ['entry_id', 'temperature', 'turbidity', 'dissolved_oxygen', 'ph', 'ammonia', 'nitrate', 'population', 'fish_length', 'fish_weight', 'created_at'])->download();
     }
 
 
