@@ -9,7 +9,6 @@ services:
       dockerfile: Dockerfile
     image: smartfishery
     container_name: smartfishery-app
-    env_file: .env
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
