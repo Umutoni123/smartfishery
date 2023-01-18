@@ -17,8 +17,8 @@ class RecordingsController extends Controller
      */
     public function index(Request $req)
     {
-        // select where pond id is equal to the pond id in the request query
-        $Recordings = Recordings::where('fishPondId', $req->query('fishPondId'))->sortByDesc('created_at')->take(20);
+        // select where pond id is equal to the pond id in the request query and sort by created at and take the first 20
+        $Recordings = Recordings::where('fishPondId', $req->query('fishPondId'))->orderBy('created_at', 'desc')->take(20)->get();
         return response()->json(["data" => $Recordings], 200);
         // $Recordings = Recordings::all();
         // $csvExporter = new LaracsvExport();
