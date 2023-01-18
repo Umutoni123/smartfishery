@@ -25,8 +25,8 @@ class ProductionController extends Controller
             $Production = Production::whereIn('environment_id', $Environment->pluck('id'))->get();
             return response()->json(["data" => $Production], 200);
         } else {
-        $Production = Production::all();
-        return response()->json(["data" => $Production], 200);
+            $Production = Production::all();
+            return response()->json(["data" => $Production], 200);
         }
     }
 
@@ -49,13 +49,20 @@ class ProductionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $req)
     {
-        $Production = Production::findOrFail($id);
-        return response()->json(["data" => $Production], 200);
+        if ($req->user()->type == 'cooperativemanager') {
+            $userroles = userroles::where('user_id', $req->user()->id)->first();
+            $Fishponds = fishponds::where('cooperative_id', $userroles->cooperative_id)->select()->get();
+            $Environment = Environment::whereIn('pond_id', $Fishponds->pluck('id'))->get();
+            $ProductionStatistics = Production::select('production_tons', 'created_at')->whereIn('environment_id', $Environment->pluck('id'))->get();
+            return response()->json(["data" => $ProductionStatistics], 200);
+        }
+
+        $ProductionStatistics = Production::select('production_tons', 'created_at')->get();
+        return response()->json(["data" => $ProductionStatistics], 200);
     }
 
     /**
