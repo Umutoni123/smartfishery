@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NewRecording;
 use App\Http\Requests\RecordingsRequest;
 use App\Models\Recordings;
+use Illuminate\Http\Request;
 use Laracsv\Export as LaracsvExport;
 
 class RecordingsController extends Controller
@@ -14,10 +15,10 @@ class RecordingsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        // take 20 latest recordings, order by created_at desc
-        $Recordings = Recordings::all()->sortByDesc('created_at')->take(20);
+        // select where pond id is equal to the pond id in the request query
+        $Recordings = Recordings::where('fishPondId', $req->query('fishPondId'))->sortByDesc('created_at')->take(20);
         return response()->json(["data" => $Recordings], 200);
         // $Recordings = Recordings::all();
         // $csvExporter = new LaracsvExport();
