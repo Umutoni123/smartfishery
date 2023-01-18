@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\userrolesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\userroles;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,8 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+    $userrole = userroles::where('user_id', $request->user()->id)->first();
+    $request->user()->role = $userrole;
     return $request->user();
 });
 
